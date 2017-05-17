@@ -1,13 +1,11 @@
 ---
 - hosts: webserver1
   vars_files:
-    - config.yml
+    - config/webserverOne.yml
   tasks:
     - name: include roles
       include_role:
         name: nodejs
-      vars:
-        node_version: "{{node_version_webserver_1}}"
 
     - name: Install nginx
       yum:
@@ -30,10 +28,8 @@
 
 - hosts: webserver2
   vars_files:
-    - config.yml
+    - config/webserverTwo.yml
   tasks:
     - name: include roles
       include_role:
         name: nodejs
-      vars:
-        node_version: "{{node_version_webserver_2}}"
