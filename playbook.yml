@@ -1,9 +1,13 @@
 ---
-- hosts: all
+- hosts: webserver1
+  vars_files:
+    - config.yml
   tasks:
     - name: include roles
       include_role:
         name: nodejs
+      vars:
+        node_version: "{{node_version_webserver_1}}"
 
     - name: Install nginx
       yum:
@@ -22,4 +26,14 @@
         name: nginx
         state: restarted
         enabled: yes
-      become: yes
+      become: yes 
+
+- hosts: webserver2
+  vars_files:
+    - config.yml
+  tasks:
+    - name: include roles
+      include_role:
+        name: nodejs
+      vars:
+        node_version: "{{node_version_webserver_2}}"

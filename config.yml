@@ -1,2 +1,2 @@
-node_version_for_myhost: 7.8.0
-node_version_for_node_only: 7.10.0
+node_version_webserver_1: 7.8.0
+node_version_webserver_2: 7.6.0
