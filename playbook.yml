@@ -1,49 +1,25 @@
 ---
 - hosts: all
   tasks:
-    - name: Add repository
-      become: yes
-      yum_repository:
+    - name: include roles
+      include_role:
         name: nodejs
-        description: Add yum repository
-        baseurl: https://rpm.nodesource.com/pub_7.x/el/6/x86_64/
-        gpgcheck: no
 
-- hosts: myhosts
-  vars_files:
-    - config.yml
-  tasks:
     - name: Install nginx
       yum:
         name: nginx
         state: latest
       become: yes
 
-    - name: Service running by port 8080
+    - name: Make sure nginx server running by port 8080
       copy:
         src: ./nginx.config
         dest: "/etc/nginx/conf.d/default.conf"
       become: yes
 
-    - name: Start nginx
+    - name: Start nginx server
       service:
         name: nginx
         state: restarted
         enabled: yes
       become: yes
-
-    - name: Install nodejs
-      yum:
-        name: nodejs-{{node_version_for_myhost}}
-        state: present
-      become: yes 
-
-- hosts: nodejsOnly
-  vars_files:
-    - config.yml
-  tasks:
-    - name: Install nodejs
-      yum:
-        name: nodejs-{{node_version_for_node_only}}"
-        state: present
-      become: yes    
