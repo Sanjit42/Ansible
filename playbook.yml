@@ -1,12 +1,11 @@
 ---
-- hosts: webserver1
+- hosts: webservers1
   vars_files:
-    - config/webserverOne.yml
-  tasks:
-    - name: include roles
-      include_role:
-        name: nodejs
+    - configs/webserverOne.yml
+  roles:
+    - nodejs
 
+  tasks:
     - name: Install nginx
       yum:
         name: nginx
@@ -24,12 +23,10 @@
         name: nginx
         state: restarted
         enabled: yes
-      become: yes 
+      become: yes
 
-- hosts: webserver2
+- hosts: webservers2
   vars_files:
-    - config/webserverTwo.yml
-  tasks:
-    - name: include roles
-      include_role:
-        name: nodejs
+    - configs/webserverTwo.yml
+  roles:
+    - nodejs
