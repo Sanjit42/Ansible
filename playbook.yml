@@ -9,6 +9,5 @@
 - hosts: webservers2
   vars_files:
     - configs/webserverTwo.yml
-
   roles:
     - nodejs
