@@ -3,11 +3,10 @@
   vars_files:
     - configs/webserverOne.yml
   roles:
-    - nodejs
-    - nginx
+    - webserver_one
 
 - hosts: webservers2
   vars_files:
     - configs/webserverTwo.yml
   roles:
-    - nodejs
+    - webserver_two
